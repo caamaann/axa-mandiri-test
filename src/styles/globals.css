@@ -67,6 +67,10 @@
 }
 
 @layer base {
+  html,
+  body {
+    @apply max-w-[100vw] overflow-clip;
+  }
   * {
     @apply border-border;
   }
