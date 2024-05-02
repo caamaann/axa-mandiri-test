@@ -1,39 +1,42 @@
-import Link from "next/link";
+import type { TUser } from "@/types/user"
+import Image from "next/image"
+import Link from "next/link"
 
-import { siteConfig } from "@/config/site";
-import { buttonVariants } from "@/components/ui/button";
+async function getData(): Promise<TUser[]> {
+  const res = await fetch(process.env.API_URL + "/users", {
+    next: { revalidate: 3600 },
+  })
+  if (!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
 
-export default function IndexPage() {
+  return await res.json()
+}
+
+export default async function IndexPage(): Promise<JSX.Element> {
+  const data = await getData()
+
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Beautifully designed components <br className="hidden sm:inline" />
-          built with Radix UI and Tailwind CSS.
-        </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
-          Accessible and customizable components that you can copy and paste
-          into your apps. Free. Open Source. And Next.js 13 Ready.
-        </p>
-      </div>
-      <div className="flex gap-4">
-        <Link
-          href={siteConfig.links.docs}
-          target="_blank"
-          rel="noreferrer"
-          className={buttonVariants()}
-        >
-          Documentation
-        </Link>
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={siteConfig.links.github}
-          className={buttonVariants({ variant: "outline" })}
-        >
-          GitHub
-        </Link>
+    <section className="container py-8">
+      <h1 className="mb-4 text-4xl font-medium">List User</h1>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 ">
+        {data.map((user) => (
+          <Link
+            href={`/user/${user.id}`}
+            key={user.id}
+            className="rounded-xl border p-4 text-center shadow-md"
+          >
+            <Image
+              src={`https://ui-avatars.com/api/?name=${user.name}&background=random&rounded=true`}
+              width={55}
+              height={55}
+              alt="Logo"
+              className="mx-auto mb-4"
+            />
+            <p className="text-sm">{user.name}</p>
+          </Link>
+        ))}
       </div>
     </section>
-  );
+  )
 }
