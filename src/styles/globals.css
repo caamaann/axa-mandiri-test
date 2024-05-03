@@ -69,7 +69,7 @@
 @layer base {
   html,
   body {
-    @apply max-w-[100vw] overflow-clip;
+    @apply max-w-[100vw] overflow-x-clip;
   }
   * {
     @apply border-border;

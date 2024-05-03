@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import type { TUser } from "@/types/user"
 import Image from "next/image"
 import Link from "next/link"
@@ -21,8 +22,7 @@ export default async function IndexPage(): Promise<JSX.Element> {
       <h1 className="mb-4 text-4xl font-medium">List User</h1>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 ">
         {data.map((user) => (
-          <Link
-            href={`/user/${user.id}`}
+          <div
             key={user.id}
             className="rounded-xl border p-4 text-center shadow-md"
           >
@@ -33,8 +33,20 @@ export default async function IndexPage(): Promise<JSX.Element> {
               alt="Logo"
               className="mx-auto mb-4"
             />
-            <p className="text-sm">{user.name}</p>
-          </Link>
+            <p className="mb-4 text-sm">{user.name}</p>
+            <div className="grid grid-cols-2 gap-4">
+              <Link href={`/user/post/${user.id}`}>
+                <Button className="w-full" variant={"outline"}>
+                  See Posts
+                </Button>
+              </Link>
+              <Link href={`/user/album/${user.id}`}>
+                <Button className="w-full" variant={"outline"}>
+                  See Albums
+                </Button>
+              </Link>
+            </div>
+          </div>
         ))}
       </div>
     </section>
