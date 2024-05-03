@@ -8,7 +8,6 @@ import { DialogPost } from "./DialogPost"
 import { DialogDeletePost } from "./DialogDeletePost"
 import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
-import { apiGetPost } from "../_actions/apiGetPost"
 import { apiGetDetailPost } from "../_actions/apiGetDetailPost"
 
 interface TProps {
@@ -18,13 +17,8 @@ interface TProps {
 
 export default function UserPost({ data, id }: TProps): JSX.Element {
   const router = useRouter()
-  const {
-    isPending,
-    error,
-    data: list,
-    refetch,
-  } = useQuery({
-    queryKey: ["repoData"],
+  const { data: list, refetch } = useQuery({
+    queryKey: ["get-user-post", id],
     queryFn: () => apiGetDetailPost({ id }),
     initialData: data,
   })
