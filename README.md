@@ -70,3 +70,4 @@ To run tests, run the following command
 - User can add, edit and delete post
 - User can add, edit and delete comment
 - Hide request to BE (using server action)
+- Empty State
