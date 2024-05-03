@@ -1,17 +1,10 @@
-export type SiteConfig = typeof siteConfig;
+export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "AXA - Front end Engineer Technical Assessment",
+  name: "FE Technical Assessment",
   description: "AXA - Front end Engineer Technical Assessment",
-  mainNav: [
-    {
-      title: "Home",
-      href: "/",
-    },
-  ],
+  mainNav: [],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    github: "https://github.com/caamaann",
   },
-};
+}

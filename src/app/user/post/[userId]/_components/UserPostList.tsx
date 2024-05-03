@@ -34,7 +34,7 @@ export default function UserPost({ data, id }: TProps): JSX.Element {
       >
         <ChevronLeft /> Back
       </Button>
-      <div className="mb-4 flex flex-col items-center justify-between gap-4 md:flex-row">
+      <div className="mb-4 flex items-center justify-between gap-4">
         <h1 className="text-4xl font-medium">List Post</h1>
         <DialogPost title="Add Post" type="add" refetch={refetch} />
       </div>

@@ -30,7 +30,7 @@ export default function AlbumDetail({ data, list }: TProps) {
       <div className="mb-4">
         <h1 className="text-4xl font-medium">Album {data.title}</h1>
       </div>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(0px,150px))] gap-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-[repeat(auto-fit,minmax(0px,150px))]">
         {list.map((photo) => (
           <div
             key={photo.id}
