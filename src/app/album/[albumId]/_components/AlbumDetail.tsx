@@ -3,17 +3,17 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Button } from "@/components/ui/button"
 import { TAlbum } from "@/types/album"
+import { TPhoto } from "@/types/photo"
 import { ChevronLeft } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
-import React from "react"
 
 interface TProps {
-  data: TAlbum[]
+  data: TAlbum
+  list: TPhoto[]
 }
 
-export default function UserAlbum({ data }: TProps) {
+export default function AlbumDetail({ data, list }: TProps) {
   const router = useRouter()
   return (
     <div>
@@ -27,28 +27,28 @@ export default function UserAlbum({ data }: TProps) {
         <ChevronLeft /> Back
       </Button>
       <div className="mb-4">
-        <h1 className="text-4xl font-medium">List Album</h1>
+        <h1 className="text-4xl font-medium">Album {data.title}</h1>
       </div>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
-        {data.map((album) => (
-          <Link
-            href={`/album/${album.id}`}
-            key={album.id}
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(0px,150px))] gap-4">
+        {list.map((photo) => (
+          <div
+            key={photo.id}
             className="overflow-hidden rounded-xl border shadow-md"
           >
-            <AspectRatio ratio={16 / 9}>
+            <AspectRatio ratio={1 / 1}>
               <Image
-                src={`https://ui-avatars.com/api/?name=${album.title}&background=random&size=256&font-size=0.1`}
+                src={photo.thumbnailUrl}
                 alt="Logo"
                 fill
                 objectFit="cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                quality={100}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
               />
             </AspectRatio>
             <div className="p-4 text-center">
-              <h5 className="font-medium">{album.title}</h5>
+              <p className="text-xs">{photo.title}</p>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
