@@ -49,3 +49,11 @@ To run this project, you will need to add the following environment variables to
 `SITE_URL=http://localhost:3000`
 
 `API_URL=http://18.143.75.177:5000`
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  npm run test
+```
