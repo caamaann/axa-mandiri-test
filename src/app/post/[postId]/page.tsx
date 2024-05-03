@@ -6,9 +6,7 @@ async function getData({ id }: { id: string }): Promise<TPosts> {
   const res = await fetch(`${process.env.API_URL}/posts/${id}`, {
     next: { revalidate: 3600 },
   })
-  if (!res.ok) {
-    throw new Error("Failed to fetch data")
-  }
+  if (!res.ok) return undefined
 
   return await res.json()
 }
@@ -17,7 +15,7 @@ export default async function UserPage({
   params: { postId },
 }: {
   params: { postId: string }
-}): Promise<JSX.Element> {
+}) {
   const data = await getData({ id: postId })
   const list = await apiGetComment({ id: postId })
 

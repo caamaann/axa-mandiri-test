@@ -5,7 +5,7 @@ export default async function UserPage({
   params: { userId },
 }: {
   params: { userId: string }
-}): Promise<JSX.Element> {
+}) {
   const data = await apiGetDetailPost({ id: userId })
 
   return (
