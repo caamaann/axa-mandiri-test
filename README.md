@@ -57,3 +57,16 @@ To run tests, run the following command
 ```bash
   npm run test
 ```
+
+## Features
+
+- Light/dark mode toggle
+- User can view list of users
+- User can view list of posts of each user
+- User can view list of albums of each user
+- User can view the detail of each post and its comment
+- User can view list of photos from an album
+- User can view the detail of photo
+- User can add, edit and delete post
+- User can add, edit and delete comment
+- Hide request to BE (using server action)
