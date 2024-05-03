@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import type { TUser } from "@/types/user"
 import Image from "next/image"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 
 async function getData(): Promise<TUser[] | undefined> {
   const res = await fetch(process.env.API_URL + "/users", {
@@ -14,6 +15,9 @@ async function getData(): Promise<TUser[] | undefined> {
 
 export default async function IndexPage() {
   const data = await getData()
+  if (!data) {
+    return notFound()
+  }
 
   return (
     <section className="container py-8">
