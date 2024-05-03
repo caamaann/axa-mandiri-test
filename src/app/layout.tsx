@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/SiteHeader"
 import { TailwindIndicator } from "@/components/TailwindIndicator"
 import { sharedMetadata } from "@/config/metadata"
 import { Toaster } from "@/components/ui/toaster"
+import GeneralProvider from "@/components/GeneralProvider"
 
 export const viewport: Viewport = {
   themeColor: [
@@ -36,12 +37,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="flex-1">{children}</div>
-            </div>
-            <TailwindIndicator />
-            <Toaster />
+            <GeneralProvider>
+              <div className="relative flex min-h-screen flex-col">
+                <SiteHeader />
+                <div className="flex-1">{children}</div>
+              </div>
+              <TailwindIndicator />
+              <Toaster />
+            </GeneralProvider>
           </ThemeProvider>
         </body>
       </html>

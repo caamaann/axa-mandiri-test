@@ -17,7 +17,7 @@ import InputForm from "@/components/form/InputForm"
 import { Form } from "@/components/ui/form"
 import { useEffect, useState } from "react"
 import { apiPostPost } from "../_actions/apiPostPost"
-import { useParams, useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 import { useToast } from "@/components/ui/use-toast"
 import { apiPutPost } from "../_actions/apiPutPost"
 import TextAreaForm from "@/components/form/TextAreaForm"
@@ -26,6 +26,7 @@ interface TProps {
   type: "add" | "edit"
   title: string
   data?: TPosts
+  refetch: () => void
 }
 
 const formSchema = z.object({
@@ -37,8 +38,7 @@ const formSchema = z.object({
   }),
 })
 
-export function DialogPost({ title, type, data }: TProps) {
-  const router = useRouter()
+export function DialogPost({ title, type, data, refetch }: TProps) {
   const { toast } = useToast()
   const param = useParams<{ userId: string }>()
   const [loading, setLoading] = useState<boolean>(false)
@@ -74,7 +74,7 @@ export function DialogPost({ title, type, data }: TProps) {
       } else {
         throw new Error("Type not valid")
       }
-      router.refresh()
+      refetch()
       setOpen(false)
       form.reset()
     } catch (error: any) {

@@ -11,18 +11,17 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { apiDeletePost } from "../_actions/apiDeletePost"
 import { useToast } from "@/components/ui/use-toast"
 
 interface TProps {
   id: string
+  refetch: () => void
 }
 
-export function DialogDeletePost({ id }: TProps) {
+export function DialogDeletePost({ id, refetch }: TProps) {
   const { toast } = useToast()
-  const router = useRouter()
   const [loading, setLoading] = useState<boolean>(false)
   const [open, setOpen] = useState<boolean>(false)
 
@@ -34,7 +33,7 @@ export function DialogDeletePost({ id }: TProps) {
         title: "Success",
         description: "Success to delete data",
       })
-      router.refresh()
+      refetch()
       setOpen(false)
     } catch (error: any) {
       toast({
