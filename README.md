@@ -17,7 +17,7 @@ Tech Test CODE.ID <> AXA (May, 2nd 2024)
 Clone the project
 
 ```bash
-  git clone https://github.com/caamaann/axa-mandiri-test
+  git clone [https://github.com/caamaann/axa-mandiri-test](https://github.com/caamaann/axa-mandiri-test.git)
 ```
 
 Go to the project directory
