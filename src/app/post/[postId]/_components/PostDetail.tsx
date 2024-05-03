@@ -9,6 +9,7 @@ import { apiGetComment } from "../_actions/apiGetComment"
 import { useQuery } from "@tanstack/react-query"
 import { DialogComment } from "./DialogComment"
 import { DialogDeleteComment } from "./DialogDeleteComment"
+import EmptyState from "@/components/EmptyState"
 
 interface TProps {
   data: TPosts
@@ -43,30 +44,34 @@ export default function PostDetail({ data, list, id }: TProps) {
         <DialogComment title="Add Comment" type="add" refetch={refetch} />
       </div>
       <div className="grid gap-4">
-        {listData.map((comment) => (
-          <div key={comment.id} className="rounded-xl border shadow-md">
-            <div className="p-4">
-              <p className="mb-2 text-xs">
-                <strong>Name:</strong> {comment.name}
-              </p>
-              <p className="mb-4 text-xs">
-                <strong>Email:</strong> {comment.email}
-              </p>
-              <p className="text-xs">
-                <strong>Body:</strong> {comment.body}
-              </p>
-              <div className="mt-4 flex justify-end gap-4">
-                <DialogComment
-                  title="Edit Comment"
-                  type="edit"
-                  data={comment}
-                  refetch={refetch}
-                />
-                <DialogDeleteComment id={`${comment.id}`} refetch={refetch} />
+        {listData.length > 0 ? (
+          listData.map((comment) => (
+            <div key={comment.id} className="rounded-xl border shadow-md">
+              <div className="p-4">
+                <p className="mb-2 text-xs">
+                  <strong>Name:</strong> {comment.name}
+                </p>
+                <p className="mb-4 text-xs">
+                  <strong>Email:</strong> {comment.email}
+                </p>
+                <p className="text-xs">
+                  <strong>Body:</strong> {comment.body}
+                </p>
+                <div className="mt-4 flex justify-end gap-4">
+                  <DialogComment
+                    title="Edit Comment"
+                    type="edit"
+                    data={comment}
+                    refetch={refetch}
+                  />
+                  <DialogDeleteComment id={`${comment.id}`} refetch={refetch} />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <EmptyState />
+        )}
       </div>
     </div>
   )

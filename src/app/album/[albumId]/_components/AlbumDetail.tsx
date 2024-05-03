@@ -8,6 +8,7 @@ import { ChevronLeft } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { DialogPhoto } from "./DialogPhoto"
+import EmptyState from "@/components/EmptyState"
 
 interface TProps {
   data: TAlbum
@@ -31,31 +32,35 @@ export default function AlbumDetail({ data, list }: TProps) {
         <h1 className="text-4xl font-medium">Album {data.title}</h1>
       </div>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-[repeat(auto-fit,minmax(0px,150px))]">
-        {list.map((photo) => (
-          <div
-            key={photo.id}
-            className="flex flex-col overflow-hidden rounded-xl border shadow-md"
-          >
-            <AspectRatio ratio={1 / 1}>
-              <Image
-                src={photo.thumbnailUrl}
-                alt="Logo"
-                fill
-                style={{
-                  objectFit: "cover",
-                }}
-                quality={100}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-              />
-            </AspectRatio>
-            <div className="flex-1 p-4 text-center">
-              <p className="text-xs">{photo.title}</p>
+        {list.length > 0 ? (
+          list.map((photo) => (
+            <div
+              key={photo.id}
+              className="flex flex-col overflow-hidden rounded-xl border shadow-md"
+            >
+              <AspectRatio ratio={1 / 1}>
+                <Image
+                  src={photo.thumbnailUrl}
+                  alt="Logo"
+                  fill
+                  style={{
+                    objectFit: "cover",
+                  }}
+                  quality={100}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                />
+              </AspectRatio>
+              <div className="flex-1 p-4 text-center">
+                <p className="text-xs">{photo.title}</p>
+              </div>
+              <div className="px-4 pb-4">
+                <DialogPhoto data={photo} name={data.title} />
+              </div>
             </div>
-            <div className="px-4 pb-4">
-              <DialogPhoto data={photo} name={data.title} />
-            </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <EmptyState />
+        )}
       </div>
     </div>
   )
