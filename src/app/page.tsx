@@ -20,7 +20,7 @@ export default async function IndexPage(): Promise<JSX.Element> {
   return (
     <section className="container py-8">
       <h1 className="mb-4 text-4xl font-medium">List User</h1>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 ">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
         {data.map((user) => (
           <div
             key={user.id}
