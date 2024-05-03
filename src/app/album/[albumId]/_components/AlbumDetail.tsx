@@ -7,6 +7,7 @@ import { TPhoto } from "@/types/photo"
 import { ChevronLeft } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import { DialogPhoto } from "./DialogPhoto"
 
 interface TProps {
   data: TAlbum
@@ -33,7 +34,7 @@ export default function AlbumDetail({ data, list }: TProps) {
         {list.map((photo) => (
           <div
             key={photo.id}
-            className="overflow-hidden rounded-xl border shadow-md"
+            className="flex flex-col overflow-hidden rounded-xl border shadow-md"
           >
             <AspectRatio ratio={1 / 1}>
               <Image
@@ -47,8 +48,11 @@ export default function AlbumDetail({ data, list }: TProps) {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
               />
             </AspectRatio>
-            <div className="p-4 text-center">
+            <div className="flex-1 p-4 text-center">
               <p className="text-xs">{photo.title}</p>
+            </div>
+            <div className="px-4 pb-4">
+              <DialogPhoto data={photo} name={data.title} />
             </div>
           </div>
         ))}
