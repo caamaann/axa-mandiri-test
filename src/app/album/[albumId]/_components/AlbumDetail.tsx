@@ -40,7 +40,9 @@ export default function AlbumDetail({ data, list }: TProps) {
                 src={photo.thumbnailUrl}
                 alt="Logo"
                 fill
-                objectFit="cover"
+                style={{
+                  objectFit: "cover",
+                }}
                 quality={100}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
               />

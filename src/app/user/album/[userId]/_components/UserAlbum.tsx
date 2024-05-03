@@ -41,7 +41,9 @@ export default function UserAlbum({ data }: TProps) {
                 src={`https://ui-avatars.com/api/?name=${album.title}&background=random&size=256&font-size=0.1`}
                 alt="Logo"
                 fill
-                objectFit="cover"
+                style={{
+                  objectFit: "cover",
+                }}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </AspectRatio>
